@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  sipi_back:
+    image: sipi_back:latest
+    container_name: sipi_back
+    env_file: env
+    networks:
+      - default
+    volumes:
+      - ./static:/sipi/sipi_back/static
+
+networks:
+  default:
+    name: timeweb_net
+    external: true

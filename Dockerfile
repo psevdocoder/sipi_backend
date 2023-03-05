@@ -14,7 +14,6 @@ EXPOSE 8000
 
 
 WORKDIR /sipi
-ENTRYPOINT ["python", "manage.py", "migrate", "--noinput"]
-ENTRYPOINT ["python", "manage.py", "collectstatic", "--noinput"]
+
 CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8000", "sipi_back.wsgi:application"]
 

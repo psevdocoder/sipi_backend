@@ -14,10 +14,9 @@ class SubjectSerializer(serializers.ModelSerializer):
         model = Subject
 
 
-class UserCreateSerializerN(serializers.ModelSerializer):
-    """
-    Создание администратором пользователей
-    """
+class UsersCreateSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
 
     class Meta:
         model = User
@@ -36,7 +35,7 @@ class UserCreateSerializerN(serializers.ModelSerializer):
         return user
 
 
-class UserSerializerN(serializers.ModelSerializer):
+class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'personal_cipher',

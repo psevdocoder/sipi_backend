@@ -2,7 +2,7 @@ from django.urls import include, path, re_path
 
 from rest_framework.routers import DefaultRouter
 
-from core.views import SubjectViewSet, UserCreateViewSet, UserViewSetN, \
+from core.views import SubjectViewSet, UserCreateViewSet, UsersViewSet, \
     CurrentUserViewSet, QueueViewSet
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -30,7 +30,7 @@ router.register(
 
 router.register(
     'users',
-    UserViewSetN,
+    UsersViewSet,
     basename='users'
 )
 

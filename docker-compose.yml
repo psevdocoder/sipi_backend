@@ -8,7 +8,7 @@ services:
     networks:
       - default
     volumes:
-      - ./static:/sipi/sipi_back/static
+      - ./static:/sipi/static
 
 networks:
   default:

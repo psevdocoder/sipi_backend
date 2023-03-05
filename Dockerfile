@@ -9,9 +9,8 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-
 EXPOSE 8000
-
+VOLUME /sipi/sipi_back/static
 
 WORKDIR /sipi
 

@@ -15,3 +15,11 @@ class GetViewSet(mixins.ListModelMixin,
     GET all items (/items/) or GET specified item (/item/1/)
     """
     pass
+
+
+class GetItemViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    GET specified item (/item/<id>/)
+    """
+    pass
+

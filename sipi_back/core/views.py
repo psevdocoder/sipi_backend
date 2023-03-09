@@ -1,8 +1,10 @@
 from http import HTTPStatus
 
+import requests
 from rest_framework import viewsets, permissions
+from rest_framework.request import Request
 
-from core.mixins import CreateViewSet, GetViewSet
+from core.mixins import CreateViewSet, GetViewSet, GetItemViewSet
 from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator
 from core.serializers import UsersCreateSerializer, UsersSerializer, \
     JoinLeftQueueSerializer
@@ -38,16 +40,27 @@ class UsersViewSet(GetViewSet):
     queryset = User.objects.all()
 
 
-class CurrentUserViewSet(viewsets.ViewSet):
+class CurrentUserViewSet(GetItemViewSet):
     """
     Get current user info
     """
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UsersSerializer
 
-    @staticmethod
-    def list(request):
-        serializer = UsersSerializer(request.user)
-        return Response(serializer.data, status=HTTPStatus.OK)
+    # def retrieve(self, request, *args, **kwargs):
+    #     serializer = self.serializer_class(request.user)
+    #     return Response(serializer.data)
+
+    def get_queryset(self):
+        user = User.objects.filter(username=self.request.user)
+        print(user)
+        return user
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        if pk == 'me':
+            return self.request.user
+        return super(CurrentUserViewSet, self).get_object()
 
 
 class QueueViewSet(viewsets.ModelViewSet):

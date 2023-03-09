@@ -47,18 +47,14 @@ class CurrentUserViewSet(GetItemViewSet):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UsersSerializer
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     serializer = self.serializer_class(request.user)
-    #     return Response(serializer.data)
-
     def get_queryset(self):
         user = User.objects.filter(username=self.request.user)
         print(user)
         return user
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
-        if pk == 'me':
+        if self.kwargs['pk'] == 'me':
+            print(self.request.user)
             return self.request.user
         return super(CurrentUserViewSet, self).get_object()
 

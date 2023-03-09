@@ -19,7 +19,7 @@ class GetViewSet(mixins.ListModelMixin,
 
 class GetItemViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
-    GET specified item (/item/<id>/)
+    GET list of items (/item/)
     """
     pass
 

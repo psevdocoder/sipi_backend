@@ -48,15 +48,12 @@ class CurrentUserViewSet(GetItemViewSet):
     serializer_class = UsersSerializer
 
     def get_queryset(self):
-        user = User.objects.filter(username=self.request.user)
-        print(user)
-        return user
+        return User.objects.filter(username=self.request.user)
 
     def get_object(self):
         if self.kwargs['pk'] == 'me':
-            print(self.request.user)
             return self.request.user
-        return super(CurrentUserViewSet, self).get_object()
+        return super().get_object()
 
 
 class QueueViewSet(viewsets.ModelViewSet):

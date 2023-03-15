@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN chmod +x ./start.sh
 
 EXPOSE 8000
 VOLUME /sipi/static

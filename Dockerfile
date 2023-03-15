@@ -15,5 +15,5 @@ VOLUME /sipi/static
 
 WORKDIR /sipi
 
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8000", "sipi_back.wsgi:application"]
+CMD ["./start.sh"]
 

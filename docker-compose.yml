@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   sipi_back:
+    build: .
     image: sipi_back:latest
     container_name: sipi_back
     env_file: env

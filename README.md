@@ -78,12 +78,7 @@ git clone https://github.com/psevdocoder/sipi_backend
     ...
 ```
 
-3. Build an application docker image
-```bash
-docker build --tag sipi_back .
-```
-
-4. Modify docker-compose.yml
+3. Modify docker-compose.yml
 ```yaml
 version: '3.8'
 
@@ -103,7 +98,7 @@ networks:
     external: true
 ```
 
-5. Create env file with your variables
+4. Create env file with your variables
 ```env
 PG_HOST=postgres_host
 PG_PORT=postgres_port
@@ -115,37 +110,37 @@ DEBUG_STATUS=0
 DJANGO_LOGLEVEL=debug
 ```
 
-6. Run the application
+5. Run the application
 ```bash
 docker-compose up -d
 ```
 
-7. Login inside the container
+6. Login inside the container
 ```
 docker exec -it sipi_back bash
 ```
 
-8. make migrations
+7. make migrations
 ```
 python manage.py makemigrations
 ```
 
-9. create superuser
+8. create superuser
 ```
 python manage.py createsuperuser
 ```
 
-10. Exit from sipi_back container and modify postgres table with users to give admin role level for superuser
+9. Exit from sipi_back container and modify postgres table with users to give admin role level for superuser
 ```
 docker exec -it postgres psql -U admin
 ```
 
-11. connect to sipi_db
+10. connect to sipi_db
 ```postgresql
 \c sipi_db
 ```
 
-12. modify user and exit
+11. modify user and exit
 ```postgresql
 update users_user set role = 3 where id = 1 ;
 \q

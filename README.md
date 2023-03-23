@@ -110,9 +110,9 @@ DEBUG_STATUS=0
 DJANGO_LOGLEVEL=debug
 ```
 
-5. Run the application
+5. Build and run the application
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 6. Login inside the container

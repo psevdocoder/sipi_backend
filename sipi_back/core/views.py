@@ -1,17 +1,15 @@
-from http import HTTPStatus
-
-import requests
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
-from rest_framework.request import Request
 
-from core.mixins import CreateViewSet, GetViewSet, GetItemViewSet
-from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator
+from core.filters import QueueFilter
+from core.mixins import CreateViewSet, GetViewSet, GetListViewSet
+from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator, \
+    HasFilterQueryParam
 from core.serializers import UsersCreateSerializer, UsersSerializer, \
-    JoinLeftQueueSerializer
+    QueueSerializer
 from core.models import Subject, Queue
 from core import serializers
 from users.models import User
-from rest_framework.response import Response
 
 
 class SubjectViewSet(viewsets.ModelViewSet):
@@ -40,7 +38,7 @@ class UsersViewSet(GetViewSet):
     queryset = User.objects.all()
 
 
-class CurrentUserViewSet(GetItemViewSet):
+class CurrentUserViewSet(GetListViewSet):
     """
     Get current user info
     """
@@ -56,9 +54,12 @@ class CurrentUserViewSet(GetItemViewSet):
         return super().get_object()
 
 
-class QueueViewSet(viewsets.ModelViewSet):
-    serializer_class = JoinLeftQueueSerializer
+class QueueViewSet(GetListViewSet, CreateViewSet):
+    permission_classes = [permissions.IsAuthenticated, HasFilterQueryParam]
+    serializer_class = QueueSerializer
     queryset = Queue.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = QueueFilter
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.request.user)
+        serializer.save(user=self.request.user)

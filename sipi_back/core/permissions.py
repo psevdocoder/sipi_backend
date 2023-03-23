@@ -33,3 +33,8 @@ class IsModeratorOrAuthRead(IsAdminOrAuthRead):
                 request.method in SAFE_METHODS
             )
         )
+
+
+class HasFilterQueryParam(BasePermission):
+    def has_permission(self, request, view):
+        return bool(request.query_params)

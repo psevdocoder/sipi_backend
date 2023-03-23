@@ -17,7 +17,7 @@ class GetViewSet(mixins.ListModelMixin,
     pass
 
 
-class GetItemViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GetListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     GET list of items (/item/)
     """

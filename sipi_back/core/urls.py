@@ -3,44 +3,26 @@ from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 
 from core.views import SubjectViewSet, UserCreateViewSet, UsersViewSet, \
-    CurrentUserViewSet, QueueViewSet
+    CurrentUserViewSet, QueueViewSet, PollViewSet, VotePollViewSet
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 router = DefaultRouter()
 
-router.register(
-    'subjects',
-    SubjectViewSet,
-    basename='subjects'
-)
+router.register('subjects', SubjectViewSet, basename='subjects')
 
-router.register(
-    'users/create',
-    UserCreateViewSet,
-    basename='create_user'
-)
+router.register('users/create', UserCreateViewSet, basename='create_user')
 
-router.register(
-    'users/me',
-    CurrentUserViewSet,
-    basename='users_me'
-)
+router.register('users/me', CurrentUserViewSet, basename='users_me')
 
-router.register(
-    'users',
-    UsersViewSet,
-    basename='users'
-)
+router.register('users', UsersViewSet, basename='users')
 
-# router.register("users", views.UserViewSet)
+router.register('polls/vote', VotePollViewSet, basename='poll_vote')
 
-router.register(
-    'queue',
-    QueueViewSet,
-    basename='queue'
-)
+router.register('polls', PollViewSet, basename='polls')
+
+router.register('queue', QueueViewSet, basename='queue')
 
 schema_view = get_schema_view(
    openapi.Info(

@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
-from core.models import Subject, Queue
+from core.models import Subject, Queue, Poll, Choice
 from users.models import User
 
 PASSWORD_LENGTH = 12
@@ -80,3 +80,40 @@ class QueueSerializer(serializers.ModelSerializer):
                 message=QUEUE_ERROR_MESSAGE
             )
         ]
+
+
+class ChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Choice
+        fields = ('id', 'text', 'votes')
+
+
+class PollSerializer(serializers.ModelSerializer):
+    choices = ChoiceSerializer(many=True, read_only=False)
+
+    class Meta:
+        model = Poll
+        fields = ('id', 'title', 'choices')
+
+    def create(self, validated_data):
+        choices_data = validated_data.pop('choices')
+        poll = Poll.objects.create(**validated_data)
+        for choice_data in choices_data:
+            Choice.objects.create(poll=poll, **choice_data)
+        return poll
+
+
+class VoteSerializer(serializers.ModelSerializer):
+    id = serializers.PrimaryKeyRelatedField(
+        queryset=Choice.objects.all()
+    )
+
+    class Meta:
+        model = Choice
+        fields = ('id',)
+
+    def create(self, validated_data):
+        choice = validated_data['id']
+        choice.votes += 1
+        choice.save()
+        return choice

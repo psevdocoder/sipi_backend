@@ -33,3 +33,14 @@ class Queue(models.Model):
             models.UniqueConstraint(fields=['subject', 'user'],
                                     name='unique_fields'),
         ]
+
+
+class Poll(models.Model):
+    title = models.CharField(max_length=200)
+
+
+class Choice(models.Model):
+    poll = models.ForeignKey(
+        Poll, related_name='choices', on_delete=models.CASCADE)
+    text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)

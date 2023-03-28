@@ -3,6 +3,7 @@ import string
 
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
 from core.models import Subject, Queue, Poll, Choice
@@ -114,6 +115,10 @@ class VoteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         choice = validated_data['id']
+        user = self.context['request'].user
+        if choice.voters.filter(id=user.id).exists():
+            raise ValidationError("You have already voted for this choice.")
+        choice.voters.add(user)
         choice.votes += 1
         choice.save()
         return choice

@@ -44,3 +44,4 @@ class Choice(models.Model):
         Poll, related_name='choices', on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+    voters = models.ManyToManyField(User, blank=True)

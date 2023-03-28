@@ -6,8 +6,8 @@ from core.mixins import CreateViewSet, GetViewSet, GetListViewSet
 from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator, \
     HasFilterQueryParam
 from core.serializers import UsersCreateSerializer, UsersSerializer, \
-    QueueSerializer
-from core.models import Subject, Queue
+    QueueSerializer, PollSerializer, VoteSerializer
+from core.models import Subject, Queue, Poll, Choice
 from core import serializers
 from users.models import User
 
@@ -63,3 +63,13 @@ class QueueViewSet(GetListViewSet, CreateViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class PollViewSet(viewsets.ModelViewSet):
+    queryset = Poll.objects.all()
+    serializer_class = PollSerializer
+
+
+class VotePollViewSet(viewsets.ModelViewSet):
+    queryset = Choice.objects.all()
+    serializer_class = VoteSerializer

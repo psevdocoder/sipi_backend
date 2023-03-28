@@ -71,7 +71,7 @@ class PollViewSet(viewsets.ModelViewSet):
     permission_classes = [IsModerator]
 
 
-class VotePollViewSet(viewsets.ModelViewSet):
+class VotePollViewSet(CreateViewSet):
     queryset = Choice.objects.all()
     serializer_class = VoteSerializer
     permission_classes = [permissions.IsAuthenticated]

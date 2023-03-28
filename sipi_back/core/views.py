@@ -68,8 +68,10 @@ class QueueViewSet(GetListViewSet, CreateViewSet):
 class PollViewSet(viewsets.ModelViewSet):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
+    permission_classes = [IsModerator]
 
 
 class VotePollViewSet(viewsets.ModelViewSet):
     queryset = Choice.objects.all()
     serializer_class = VoteSerializer
+    permission_classes = [permissions.IsAuthenticated]

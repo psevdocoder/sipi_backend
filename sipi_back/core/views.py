@@ -1,18 +1,20 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
+from rest_framework.generics import get_object_or_404
 
 from core.filters import QueueFilter
-from core.mixins import CreateViewSet, GetViewSet, GetListViewSet
+from core.mixins import CreateViewSet, GetViewSet, GetListViewSet, \
+    RetrieveListCreateDestroy
 from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator, \
     HasFilterQueryParam
 from core.serializers import UsersCreateSerializer, UsersSerializer, \
-    QueueSerializer, PollSerializer, VoteSerializer
-from core.models import Subject, Queue, Poll, Choice
+    QueueSerializer, PollSerializer, VoteSerializer, AttendanceSerializer
+from core.models import Subject, Queue, Poll, Choice, Attendance
 from core import serializers
 from users.models import User
 
 
-class SubjectViewSet(viewsets.ModelViewSet):
+class SubjectViewSet(RetrieveListCreateDestroy):
     """
     Subject operations
     """
@@ -65,7 +67,7 @@ class QueueViewSet(GetListViewSet, CreateViewSet):
         serializer.save(user=self.request.user)
 
 
-class PollViewSet(viewsets.ModelViewSet):
+class PollViewSet(RetrieveListCreateDestroy):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
     permission_classes = [IsModerator]
@@ -75,3 +77,18 @@ class VotePollViewSet(CreateViewSet):
     queryset = Choice.objects.all()
     serializer_class = VoteSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class AttendanceViewSet(viewsets.ModelViewSet):
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
+
+    def get_queryset(self):
+        subject_slug = self.kwargs['subject_slug']
+        subject = get_object_or_404(Subject, slug=subject_slug)
+        return Attendance.objects.filter(subject=subject)
+
+    def perform_create(self, serializer):
+        subject_slug = self.kwargs['subject_slug']
+        subject = get_object_or_404(Subject, slug=subject_slug)
+        serializer.save(subject=subject)

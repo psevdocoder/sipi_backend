@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.text import slugify
 from users.models import User
@@ -45,3 +46,12 @@ class Choice(models.Model):
     text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
     voters = models.ManyToManyField(User, blank=True)
+
+
+class Attendance(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    lesson_serial_number = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(32)]
+    )
+    is_present = models.BooleanField(default=False)

@@ -12,7 +12,7 @@ class GetViewSet(mixins.ListModelMixin,
                  mixins.RetrieveModelMixin,
                  viewsets.GenericViewSet):
     """
-    GET all items (/items/) or GET specified item (/item/1/)
+    GET all items (/items/) or GET specified item (/item/id/)
     """
     pass
 
@@ -23,3 +23,14 @@ class GetListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     pass
 
+
+class RetrieveListCreateDestroy(mixins.RetrieveModelMixin,
+                                mixins.ListModelMixin,
+                                mixins.CreateModelMixin,
+                                mixins.DestroyModelMixin,
+                                viewsets.GenericViewSet
+                                ):
+    """
+    POST, GET (/item/ and /item/id/) DELETE requests
+    """
+    pass

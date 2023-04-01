@@ -126,6 +126,10 @@ class VoteSerializer(serializers.ModelSerializer):
 
 class AttendanceSerializer(serializers.ModelSerializer):
     is_present = serializers.BooleanField(read_only=False)
+    subject = serializers.SlugRelatedField(many=False,
+                                           slug_field='slug',
+                                           read_only=False,
+                                           queryset=Subject.objects.all())
 
     class Meta:
         model = Attendance

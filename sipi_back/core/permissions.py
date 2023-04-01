@@ -36,5 +36,9 @@ class IsModeratorOrAuthRead(IsAdminOrAuthRead):
 
 
 class HasFilterQueryParam(BasePermission):
+    message = 'You do not specified url parameter for this request type'
+
     def has_permission(self, request, view):
-        return bool(request.query_params)
+        if request.method in ['GET', 'HEAD', 'OPTIONS']:
+            return bool(request.query_params)
+        return True

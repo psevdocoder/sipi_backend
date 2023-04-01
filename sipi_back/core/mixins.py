@@ -8,16 +8,16 @@ class CreateViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     pass
 
 
-class GetViewSet(mixins.ListModelMixin,
-                 mixins.RetrieveModelMixin,
-                 viewsets.GenericViewSet):
+class RetrieveListViewSet(mixins.ListModelMixin,
+                          mixins.RetrieveModelMixin,
+                          viewsets.GenericViewSet):
     """
     GET all items (/items/) or GET specified item (/item/id/)
     """
     pass
 
 
-class GetListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     GET list of items (/item/)
     """

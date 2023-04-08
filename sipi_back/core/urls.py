@@ -3,7 +3,8 @@ from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 
 from core.views import SubjectViewSet, UserCreateViewSet, UsersViewSet, \
-    CurrentUserViewSet, QueueViewSet, PollViewSet, VotePollViewSet
+    CurrentUserViewSet, QueueViewSet, PollViewSet, VotePollViewSet, \
+    AttendanceViewSet
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -23,6 +24,8 @@ router.register('polls/vote', VotePollViewSet, basename='poll_vote')
 router.register('polls', PollViewSet, basename='polls')
 
 router.register('queue', QueueViewSet, basename='queue')
+
+router.register('attendance', AttendanceViewSet, basename='attendance')
 
 schema_view = get_schema_view(
    openapi.Info(

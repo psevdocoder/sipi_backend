@@ -6,7 +6,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
-from core.models import Subject, Queue, Poll, Choice
+from core.models import Subject, Queue, Poll, Choice, Attendance
 from users.models import User
 
 PASSWORD_LENGTH = 12
@@ -122,3 +122,16 @@ class VoteSerializer(serializers.ModelSerializer):
         choice.votes += 1
         choice.save()
         return choice
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    is_present = serializers.BooleanField(read_only=False)
+    subject = serializers.SlugRelatedField(many=False,
+                                           slug_field='slug',
+                                           read_only=False,
+                                           queryset=Subject.objects.all())
+
+    class Meta:
+        model = Attendance
+        fields = ['subject', 'student', 'lesson_serial_number', 'is_present']
+

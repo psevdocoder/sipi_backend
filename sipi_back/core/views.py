@@ -9,7 +9,7 @@ from core.filters import BySubjectFilter
 from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
     RetrieveListCreateDestroy
 from core.permissions import IsAdmin, IsAdminOrAuthRead, IsModerator, \
-    HasFilterQueryParam, IsModeratorOrAuthRead
+    HasFilterQueryParamOrPOST, IsModeratorOrAuthRead
 from core.serializers import UsersCreateSerializer, UsersSerializer, \
     QueueSerializer, PollSerializer, VoteSerializer, AttendanceSerializer
 from core.models import Subject, Queue, Poll, Choice, Attendance
@@ -63,7 +63,8 @@ class QueueViewSet(ListViewSet, CreateViewSet):
     """
     ViewSet for Queue functionality for existing Subject
     """
-    permission_classes = [permissions.IsAuthenticated, HasFilterQueryParam]
+    permission_classes = [
+        permissions.IsAuthenticated, HasFilterQueryParamOrPOST]
     serializer_class = QueueSerializer
     queryset = Queue.objects.all()
     filter_backends = (DjangoFilterBackend,)
@@ -79,7 +80,7 @@ class PollViewSet(RetrieveListCreateDestroy):
     """
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
-    permission_classes = [IsModerator]
+    permission_classes = [IsModeratorOrAuthRead]
 
 
 class VotePollViewSet(CreateViewSet):
@@ -97,15 +98,5 @@ class AttendanceViewSet(viewsets.ModelViewSet):
     """
     queryset = Attendance.objects.all()
     serializer_class = AttendanceSerializer
-    permission_classes = [IsModeratorOrAuthRead, HasFilterQueryParam]
+    permission_classes = [IsModeratorOrAuthRead, HasFilterQueryParamOrPOST]
     filterset_class = BySubjectFilter
-
-    # def get_queryset(self):
-    #     subject = self.kwargs['subject']
-    #     subject = get_object_or_404(Subject, slug=subject)
-    #     return Attendance.objects.filter(subject=subject)
-    #
-    # def perform_create(self, serializer):
-    #     subject = self.kwargs['subject']
-    #     subject = get_object_or_404(Subject, slug=subject)
-    #     serializer.save(subject=subject)

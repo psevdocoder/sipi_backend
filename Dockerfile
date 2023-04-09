@@ -14,6 +14,7 @@ RUN chmod +x ./start.sh
 
 EXPOSE 8000
 VOLUME /sipi/logs
+VOLUME /sipi/static
 
 WORKDIR /sipi
 

@@ -10,6 +10,7 @@ services:
       - default
     volumes:
       - ./logs:/sipi/logs
+      - ./static:/sipi/static
 
 networks:
   default:

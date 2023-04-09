@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'sipi_back.middlewares.RequestLoggingMiddleware'
 ]
 
 ROOT_URLCONF = 'sipi_back.urls'
@@ -174,33 +175,36 @@ SIMPLE_JWT = {
 
 # ------Logging Configuration------
 
-# Clear prev config
-LOGGING_CONFIG = None
-
-# Get loglevel from env
-LOGLEVEL = os.getenv('DJANGO_LOGLEVEL', 'info').upper()
-
-logging.config.dictConfig({
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'console': {
-            'format': '%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(module)s %(process)d %(thread)d %(message)s',
-        },
+        'sipi_formatter': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        }
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'console',
+            'level': 'INFO',
+            'formatter': 'sipi_formatter',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'app.log',
+            'formatter': 'sipi_formatter',
         },
     },
     'loggers': {
         '': {
-            'level': LOGLEVEL,
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
         },
     },
-})
+}
+
 
 # ----- Swagger settings (redoc) -----
 

@@ -174,6 +174,10 @@ SIMPLE_JWT = {
 }
 
 # ------Logging Configuration------
+LOGS_DIR = BASE_DIR / 'logs'
+
+if not LOGS_DIR.exists():
+    LOGS_DIR.mkdir()
 
 LOGGING = {
     'version': 1,
@@ -193,7 +197,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': 'app.log',
+            'filename': LOGS_DIR / 'app.log',
             'formatter': 'sipi_formatter',
         },
     },

@@ -177,7 +177,7 @@ SIMPLE_JWT = {
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'sipi_formatter': {
             'format': '{levelname} {message}',

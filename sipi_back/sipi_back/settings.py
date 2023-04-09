@@ -33,6 +33,7 @@ DEBUG = os.getenv("DEBUG_STATUS", 'False').lower() in ('true', '1', 't')
 
 if DEBUG is False:
     ALLOWED_HOSTS = ['127.0.0.1', 'assistant.5pwjust.ru']
+    CSRF_TRUSTED_ORIGINS = ['https://assistant.5pwjust.ru']
 
 
 # Application definition

@@ -32,8 +32,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv("DEBUG_STATUS", 'False').lower() in ('true', '1', 't')
 
 if DEBUG is False:
-    ALLOWED_HOSTS = ['127.0.0.1', 'assistant.5pwjust.ru']
-    CSRF_TRUSTED_ORIGINS = ['https://assistant.5pwjust.ru']
+    ALLOWED_HOSTS = ['127.0.0.1', os.getenv('ALLOWED_HOSTS')]
+    CSRF_TRUSTED_ORIGINS = [os.getenv('CSRF_TRUSTED_ORIGINS')]
 
 
 # Application definition
@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # custom
     'sipi_back.middlewares.RequestLoggingMiddleware'
 ]
 

@@ -3,7 +3,7 @@ WORKDIR /sipi
 COPY ./sipi_back .
 COPY ./requirements.txt .
 COPY ./start.sh .
-COPY ./fixtures.json .
+RUN cp ./fixtures.json . || true
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1

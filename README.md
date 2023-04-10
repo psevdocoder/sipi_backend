@@ -1,5 +1,5 @@
 # sipi_backend
-
+[![Docker Image CI](https://github.com/psevdocoder/sipi_backend/actions/workflows/sipi_update.yaml/badge.svg)](https://github.com/psevdocoder/sipi_backend/actions/workflows/sipi_update.yaml)
 
 ## About
 This is project for Systems and software engineering subject, which should solve such problems as:

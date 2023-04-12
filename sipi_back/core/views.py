@@ -1,9 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 
 from core.filters import BySubjectFilter
 from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \

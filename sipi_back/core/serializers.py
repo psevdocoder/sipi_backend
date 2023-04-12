@@ -72,8 +72,10 @@ class QueueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Queue
-        fields = ('user', 'subject', 'timestamp', 'subject_name', 'user_fullname')
-        read_only_fields = ('user', 'timestamp', 'subject', 'subject_name', 'user_fullname')
+        fields = (
+            'user', 'subject', 'timestamp', 'subject_name', 'user_fullname')
+        read_only_fields = (
+            'user', 'timestamp', 'subject', 'subject_name', 'user_fullname')
         validators = [
             UniqueTogetherValidator(
                 queryset=Queue.objects.all(),
@@ -134,4 +136,3 @@ class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['subject', 'student', 'lesson_serial_number', 'is_present']
-

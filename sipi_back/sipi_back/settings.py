@@ -35,7 +35,6 @@ if DEBUG is False:
     CSRF_TRUSTED_ORIGINS = [os.getenv('CSRF_TRUSTED_ORIGINS')]
     USE_X_FORWARDED_HOST = True
     USE_X_FORWARDED_PORT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition

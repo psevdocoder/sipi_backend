@@ -33,6 +33,9 @@ DEBUG = os.getenv("DEBUG_STATUS", 'False').lower() in ('true', '1', 't')
 if DEBUG is False:
     ALLOWED_HOSTS = ['127.0.0.1', os.getenv('ALLOWED_HOSTS')]
     CSRF_TRUSTED_ORIGINS = [os.getenv('CSRF_TRUSTED_ORIGINS')]
+    USE_X_FORWARDED_HOST = True
+    USE_X_FORWARDED_PORT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition

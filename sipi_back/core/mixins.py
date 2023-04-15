@@ -34,3 +34,16 @@ class RetrieveListCreateDestroy(mixins.RetrieveModelMixin,
     POST, GET (/item/ and /item/id/) DELETE requests
     """
     pass
+
+
+class RetrieveListCreateDestroyUpdate(mixins.RetrieveModelMixin,
+                                      mixins.ListModelMixin,
+                                      mixins.CreateModelMixin,
+                                      mixins.DestroyModelMixin,
+                                      mixins.UpdateModelMixin,
+                                      viewsets.GenericViewSet
+                                      ):
+    """
+    POST, GET (/item/ and /item/id/) DELETE, PUT requests
+    """
+    http_method_names = ['get', 'post', 'put', 'delete']

@@ -216,5 +216,15 @@ LOGGING = {
 # FORCE_SCRIPT_NAME = 'https://assistant.5pwjust.ru'
 
 SWAGGER_SETTINGS = {
-    'DEFAULT_API_URL': 'https://assistant.5pwjust.ru'
+    'DEFAULT_API_URL': 'https://assistant.5pwjust.ru',
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic',
+        },
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }

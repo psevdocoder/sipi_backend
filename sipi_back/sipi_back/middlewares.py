@@ -1,6 +1,7 @@
 import logging
 import datetime
 
+from sipi_back.settings import DEBUG
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +17,10 @@ class RequestLoggingMiddleware:
         method = request.method
         username = request.user.username \
             if request.user.is_authenticated else 'anonymous'
-        remote_addr = request.META.get('HTTP_X_FORWARDED_FOR', 'unknown')
+        if DEBUG is True:
+            remote_addr = request.META.get('REMOTE_ADDR', 'unknown')
+        else:
+            remote_addr = request.META.get('CF_CONNECTING_IP', 'unknown')
         log_data = f'{time}, {method}: {endpoint}, user: {username}, ' \
                    f'status code: {response.status_code}, IP: {remote_addr}'
         logger.info(log_data)

@@ -81,5 +81,3 @@ def sipi_redoc_user_me(tag):
             ),
         },
     )
-
-

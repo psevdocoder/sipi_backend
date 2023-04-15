@@ -8,15 +8,12 @@ from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
     RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate
 from core.permissions import IsAdmin, IsAdminOrAuthRead, \
     HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead
-from core.serializers import UsersSerializer, \
-    QueueSerializer, PollSerializer, VoteSerializer, AttendanceSerializer, \
-    UsersCreateSerializer
+from core.serializers import UsersSerializer, QueueSerializer, PollSerializer,\
+    VoteSerializer, AttendanceSerializer, UsersCreateSerializer
 from core.models import Subject, Queue, Poll, Choice, Attendance
 from core import serializers
 from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me
 from users.models import User
-
-PASSWORD_LENGTH = 12
 
 
 class SubjectViewSet(RetrieveListCreateDestroy):

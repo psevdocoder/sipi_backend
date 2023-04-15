@@ -1,6 +1,8 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.text import slugify
+from unidecode import unidecode
+
 from users.models import User
 
 
@@ -9,7 +11,7 @@ class Subject(models.Model):
     slug = models.SlugField(max_length=40, unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(unidecode(self.title))
         super().save(*args, **kwargs)
 
 

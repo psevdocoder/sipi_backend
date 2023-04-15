@@ -16,7 +16,8 @@ class RequestLoggingMiddleware:
         method = request.method
         username = request.user.username \
             if request.user.is_authenticated else 'anonymous'
+        remote_addr = request.META.get('REMOTE_ADDR', 'unknown')
         log_data = f'{time}, {method}: {endpoint}, user: {username}, ' \
-                   f'status code: {response.status_code}'
+                   f'status code: {response.status_code}, IP: {remote_addr}'
         logger.info(log_data)
         return response

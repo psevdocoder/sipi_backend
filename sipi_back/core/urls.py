@@ -2,12 +2,11 @@ from django.urls import include, path, re_path
 
 from rest_framework.routers import DefaultRouter
 
-from core.views import SubjectViewSet, UserCreateViewSet, UsersViewSet, \
-    CurrentUserViewSet, QueueViewSet, PollViewSet, VotePollViewSet, \
-    AttendanceViewSet
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from core.views import SubjectViewSet, UsersViewSet, \
+    QueueViewSet, PollViewSet, VotePollViewSet, \
+    AttendanceViewSet, UserCreateViewSet
+
+from sipi_back.redoc import schema_view
 
 router = DefaultRouter()
 
@@ -15,7 +14,7 @@ router.register('subjects', SubjectViewSet, basename='subjects')
 
 router.register('users/create', UserCreateViewSet, basename='create_user')
 
-router.register('users/me', CurrentUserViewSet, basename='users_me')
+# router.register('users/me', CurrentUserViewSet, basename='users_me')
 
 router.register('users', UsersViewSet, basename='users')
 
@@ -27,26 +26,12 @@ router.register('queue', QueueViewSet, basename='queue')
 
 router.register('attendance', AttendanceViewSet, basename='attendance')
 
-schema_view = get_schema_view(
-   openapi.Info(
-      title="Group Assistant API",
-      default_version='v1',
-      description="Test description",
-      # terms_of_service="https://www.google.com/policies/terms/",
-      # contact=openapi.Contact(email="contact@snippets.local"),
-      # license=openapi.License(name="BSD License"),
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
-)
-
 
 urlpatterns = [
     path('', include(router.urls)),
 
     # path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    # path('queue/', QueueViewSet.as_view(), name='queue-list-create'),
 
 
     # redoc urls

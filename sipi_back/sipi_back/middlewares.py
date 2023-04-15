@@ -20,7 +20,7 @@ class RequestLoggingMiddleware:
         if DEBUG is True:
             remote_addr = request.META.get('REMOTE_ADDR', 'unknown')
         else:
-            remote_addr = request.META.get('CF_CONNECTING_IP', 'unknown')
+            remote_addr = request.META.get('CF_CONNECTING_IP')
         log_data = f'{time}, {method}: {endpoint}, user: {username}, ' \
                    f'status code: {response.status_code}, IP: {remote_addr}'
         logger.info(log_data)

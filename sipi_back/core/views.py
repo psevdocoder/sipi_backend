@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -215,6 +216,7 @@ class VotePollViewSet(CreateViewSet):
         return super().create(request, *args, **kwargs)
 
 
+
 class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     """
     ViewSet used for marking attendance of students
@@ -228,19 +230,29 @@ class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     REDOC_TAG = 'Посещаемость'
 
     LIST_DESCRIPTION = 'Нужен параметр фильтра по slug предмета. ' \
-                       'Например: /api/attendance/?subject=ost'
+                       'Например: /api/attendance/?subject=ost <br>' \
+                       'Параметр lesson_serial_number - Порядковый номер ' \
+                       'пары, урока и т.д.'
     LIST_OPERATION_ID = 'Получение посещаемости студентов'
 
-    CREATE_DESCRIPTION = 'Поставить отметку о посещаемости студента.'
+    CREATE_DESCRIPTION = 'Поставить отметку о посещаемости студента.  <br>' \
+                         'Параметр lesson_serial_number - Порядковый номер ' \
+                         'пары, урока и т.д.'
     CREATE_OPERATION_ID = 'Поставить посещение студенту'
 
-    RETRIEVE_DESCRIPTION = 'Поставить отметку о посещаемости студента.'
+    RETRIEVE_DESCRIPTION = 'Поставить отметку о посещаемости студента. <br>' \
+                           'Параметр lesson_serial_number - Порядковый номер '\
+                           'пары, урока и т.д.'
     RETRIEVE_OPERATION_ID = 'Поставить посещение студенту'
 
-    UPDATE_DESCRIPTION = 'Изменить отметку посещения студенту.'
+    UPDATE_DESCRIPTION = 'Изменить отметку посещения студенту.  <br>' \
+                         'Параметр lesson_serial_number - Порядковый номер ' \
+                         'пары, урока и т.д.'
     UPDATE_OPERATION_ID = 'Изменить посещение студенту'
 
-    DESTROY_DESCRIPTION = 'Удалить отметку о посещаемости.'
+    DESTROY_DESCRIPTION = 'Удалить отметку о посещаемости. <br>' \
+                          'Параметр lesson_serial_number - Порядковый номер ' \
+                          'пары, урока и т.д.'
     DESTROY_OPERATION_ID = 'Удалить отметку о посещаемости'
 
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,

@@ -18,10 +18,13 @@ class RequestLoggingMiddleware:
         username = request.user.username \
             if request.user.is_authenticated else 'anonymous'
         if DEBUG is True:
-            remote_addr = request.META.get('REMOTE_ADDR', 'unknown')
+            ip_address = request.META.get('REMOTE_ADDR', 'unknown')
         else:
             remote_addr = request.META.get('HTTP_X_FORWARDED_FOR')
+            ip_address = remote_addr.split(',')[0].strip() if remote_addr else\
+                'unknown'
+
         log_data = f'{time}, {method}: {endpoint}, user: {username}, ' \
-                   f'status code: {response.status_code}, IP: {remote_addr}'
+                   f'status code: {response.status_code}, IP: {ip_address}'
         logger.info(log_data)
         return response

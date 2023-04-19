@@ -3,7 +3,16 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-REDOC_DESC = 'Проект по СИПИ, 6 семестр. Аналитик - бездельник.'
+REDOC_DESC = 'Проект по СИПИ, 6 семестр. Аналитик - бездельник.' \
+             '<br>' \
+             '<h1> Алгоритм работы с API </h1>' \
+             '1. Любой существующий в системе пользователь получает токен' \
+             ' авторизации в поле <b>access</b>, отправив POST запрос' \
+             ' по эндпоинту <code>/api/auth/jwt/create/</code> ' \
+             'с логином и паролем.<br>' \
+             '2. Все запросы далее (за исключением упомянутого выше) ' \
+             'обрабатываются в соответствии с приведенными ниже примерами ' \
+             'только по токену авторизации, переданному в заголовке запроса.'
 
 
 SECURITY_DEFINITIONS = {
@@ -23,7 +32,6 @@ schema_view = get_schema_view(
         # terms_of_service="https://www.google.com/policies/terms/",
         # contact=openapi.Contact(email="contact@snippets.local"),
         # license=openapi.License(name="BSD License"),
-
     ),
     public=True,
     permission_classes=[permissions.AllowAny],

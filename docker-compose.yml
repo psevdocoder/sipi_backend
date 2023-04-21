@@ -7,6 +7,7 @@ services:
     image: just55py/sipi_back:latest
     container_name: sipi_back
     env_file: env
+    restart: unless-stopped
     networks:
       - default
     volumes:

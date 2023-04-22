@@ -128,11 +128,18 @@ class VoteSerializer(serializers.ModelSerializer):
 
 class AttendanceSerializer(serializers.ModelSerializer):
     is_present = serializers.BooleanField(read_only=False)
+    user_fullname = serializers.SerializerMethodField(read_only=True)
     subject = serializers.SlugRelatedField(many=False,
                                            slug_field='slug',
                                            read_only=False,
                                            queryset=Subject.objects.all())
 
+    @staticmethod
+    def get_user_fullname(obj):
+        return '{} {}'.format(obj.student.first_name, obj.student.last_name)
+
     class Meta:
         model = Attendance
-        fields = ['subject', 'student', 'lesson_serial_number', 'is_present']
+        fields = ['subject', 'student', 'lesson_serial_number', 'is_present',
+                  'user_fullname']
+

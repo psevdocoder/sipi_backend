@@ -216,7 +216,6 @@ class VotePollViewSet(CreateViewSet):
         return super().create(request, *args, **kwargs)
 
 
-
 class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     """
     ViewSet used for marking attendance of students

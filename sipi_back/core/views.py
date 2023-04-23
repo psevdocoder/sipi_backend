@@ -1,5 +1,4 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -19,7 +18,7 @@ from users.models import User
 
 class SubjectViewSet(RetrieveListCreateDestroy):
     """
-    Subject management
+    Класс предоставляющий управление предметами
     """
     queryset = Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
@@ -42,28 +41,56 @@ class SubjectViewSet(RetrieveListCreateDestroy):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Получить список предметов
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION,
                 operation_id=CREATE_OPERATION_ID,
                 access_level=2, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать новый предмет.
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить сведения о конкретном предмете
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Удалить предмет
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().destroy(request, *args, **kwargs)
 
 
 class UserCreateViewSet(CreateViewSet):
     """
-    Creating new users by admin
+    Вьюсет обеспечивающий создание пользователей
     """
     permission_classes = (IsAdmin,)
     serializer_class = UsersCreateSerializer
@@ -76,12 +103,19 @@ class UserCreateViewSet(CreateViewSet):
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=3,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать пользователя
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
 
 class UsersViewSet(RetrieveListViewSet):
     """
-    Get specified user or users list
+    Вьюсет для получения пользователей или пользователя
     """
     serializer_class = UsersSerializer
     permission_classes = (permissions.IsAuthenticated,)
@@ -98,6 +132,11 @@ class UsersViewSet(RetrieveListViewSet):
     @action(detail=False, methods=['get'], url_path='me')
     @sipi_redoc_user_me(tag=REDOC_TAG)
     def me(self, request):
+        """
+        Получить информацию о своем профиле
+        :param request:
+        :return:
+        """
         if not request.data:
             serializer = self.serializer_class(request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -110,18 +149,32 @@ class UsersViewSet(RetrieveListViewSet):
     @sipi_redoc(description=LIST_DESCRIPTION,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG, access_level=1)
     def list(self, request, *args, **kwargs):
+        """
+        Получить список пользователей
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG,
                 access_level=1)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить сведения о пользователе
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().retrieve(request, *args, **kwargs)
 
 
 class QueueViewSet(ListViewSet, CreateViewSet):
     """
-    ViewSet for Queue functionality for existing Subject
+    Вьюсет для функционирования очередей в существующих предметах Subject
     """
     permission_classes = [
         permissions.IsAuthenticated, HasFilterQueryParamOrUnsafeMethod]
@@ -140,16 +193,35 @@ class QueueViewSet(ListViewSet, CreateViewSet):
     CREATE_OPERATION_ID = 'Встать в очередь'
 
     def perform_create(self, serializer):
+        """
+        Изменение перед сохранением
+        :param serializer:
+        :return:
+        """
         serializer.save(user=self.request.user)
 
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=1,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Встать в очереди
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Список людей в очереди
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().list(request, *args, **kwargs)
 
 
@@ -178,22 +250,50 @@ class PollViewSet(RetrieveListCreateDestroy):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Список опросов
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION,
                 operation_id=CREATE_OPERATION_ID,
                 access_level=2, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать опрос
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить информацию об опросе
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Удалить опрос
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().destroy(request, *args, **kwargs)
 
 
@@ -213,6 +313,13 @@ class VotePollViewSet(CreateViewSet):
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=1,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Проголосовать в опросе
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
 
@@ -257,24 +364,62 @@ class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Список посещаемости
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=2,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать отметку о посещаемости студента
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить информацию о конкретном пользователе в конкретный день
+        по конкретному предмету
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=UPDATE_DESCRIPTION, access_level=2,
                 operation_id=UPDATE_OPERATION_ID, tag=REDOC_TAG)
     def update(self, request, *args, **kwargs):
+        """
+        Изменить информацию о конкретном пользователе в конкретный день
+        по конкретному предмету
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().update(request, *args, **kwargs)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Удалить информацию о конкретном пользователе в конкретный день
+        по конкретному предмету
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return super().destroy(request, *args, **kwargs)

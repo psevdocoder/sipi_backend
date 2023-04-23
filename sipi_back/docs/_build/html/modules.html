@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>sipi_back &#8212; документация sipi </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="sipi-back">
+<h1>sipi_back<a class="headerlink" href="#sipi-back" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.migrations.html">core.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations.0001_initial">core.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations.0002_initial">core.migrations.0002_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations.0003_attendance">core.migrations.0003_attendance module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">CoreConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.name"><code class="docutils literal notranslate"><span class="pre">CoreConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.filters">core.filters module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.filters.BySubjectFilter"><code class="docutils literal notranslate"><span class="pre">BySubjectFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.filters.BySubjectFilter.base_filters"><code class="docutils literal notranslate"><span class="pre">BySubjectFilter.base_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.filters.BySubjectFilter.declared_filters"><code class="docutils literal notranslate"><span class="pre">BySubjectFilter.declared_filters</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.mixins">core.mixins module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.mixins.CreateViewSet"><code class="docutils literal notranslate"><span class="pre">CreateViewSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.mixins.ListViewSet"><code class="docutils literal notranslate"><span class="pre">ListViewSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.mixins.RetrieveListCreateDestroy"><code class="docutils literal notranslate"><span class="pre">RetrieveListCreateDestroy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.mixins.RetrieveListCreateDestroyUpdate"><code class="docutils literal notranslate"><span class="pre">RetrieveListCreateDestroyUpdate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.mixins.RetrieveListCreateDestroyUpdate.http_method_names"><code class="docutils literal notranslate"><span class="pre">RetrieveListCreateDestroyUpdate.http_method_names</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.mixins.RetrieveListViewSet"><code class="docutils literal notranslate"><span class="pre">RetrieveListViewSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.models">core.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.Attendance"><code class="docutils literal notranslate"><span class="pre">Attendance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Attendance.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Attendance.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.id"><code class="docutils literal notranslate"><span class="pre">Attendance.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.is_present"><code class="docutils literal notranslate"><span class="pre">Attendance.is_present</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.lesson_serial_number"><code class="docutils literal notranslate"><span class="pre">Attendance.lesson_serial_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.objects"><code class="docutils literal notranslate"><span class="pre">Attendance.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.student"><code class="docutils literal notranslate"><span class="pre">Attendance.student</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.student_id"><code class="docutils literal notranslate"><span class="pre">Attendance.student_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.subject"><code class="docutils literal notranslate"><span class="pre">Attendance.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Attendance.subject_id"><code class="docutils literal notranslate"><span class="pre">Attendance.subject_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.Choice"><code class="docutils literal notranslate"><span class="pre">Choice</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Choice.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Choice.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.id"><code class="docutils literal notranslate"><span class="pre">Choice.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.objects"><code class="docutils literal notranslate"><span class="pre">Choice.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.poll"><code class="docutils literal notranslate"><span class="pre">Choice.poll</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.poll_id"><code class="docutils literal notranslate"><span class="pre">Choice.poll_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.text"><code class="docutils literal notranslate"><span class="pre">Choice.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.voters"><code class="docutils literal notranslate"><span class="pre">Choice.voters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Choice.votes"><code class="docutils literal notranslate"><span class="pre">Choice.votes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Poll.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Poll.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.choices"><code class="docutils literal notranslate"><span class="pre">Poll.choices</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.id"><code class="docutils literal notranslate"><span class="pre">Poll.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.objects"><code class="docutils literal notranslate"><span class="pre">Poll.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Poll.title"><code class="docutils literal notranslate"><span class="pre">Poll.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.Queue"><code class="docutils literal notranslate"><span class="pre">Queue</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Queue.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Queue.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.get_next_by_timestamp"><code class="docutils literal notranslate"><span class="pre">Queue.get_next_by_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.get_previous_by_timestamp"><code class="docutils literal notranslate"><span class="pre">Queue.get_previous_by_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.id"><code class="docutils literal notranslate"><span class="pre">Queue.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.objects"><code class="docutils literal notranslate"><span class="pre">Queue.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.subject"><code class="docutils literal notranslate"><span class="pre">Queue.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.subject_id"><code class="docutils literal notranslate"><span class="pre">Queue.subject_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.timestamp"><code class="docutils literal notranslate"><span class="pre">Queue.timestamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.user"><code class="docutils literal notranslate"><span class="pre">Queue.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Queue.user_id"><code class="docutils literal notranslate"><span class="pre">Queue.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.Subject"><code class="docutils literal notranslate"><span class="pre">Subject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Subject.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Subject.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.Subject"><code class="docutils literal notranslate"><span class="pre">Subject.Subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.attendance_set"><code class="docutils literal notranslate"><span class="pre">Subject.attendance_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.id"><code class="docutils literal notranslate"><span class="pre">Subject.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.objects"><code class="docutils literal notranslate"><span class="pre">Subject.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.save"><code class="docutils literal notranslate"><span class="pre">Subject.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.slug"><code class="docutils literal notranslate"><span class="pre">Subject.slug</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.Subject.title"><code class="docutils literal notranslate"><span class="pre">Subject.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.permissions">core.permissions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.HasFilterQueryParamOrUnsafeMethod"><code class="docutils literal notranslate"><span class="pre">HasFilterQueryParamOrUnsafeMethod</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.HasFilterQueryParamOrUnsafeMethod.has_permission"><code class="docutils literal notranslate"><span class="pre">HasFilterQueryParamOrUnsafeMethod.has_permission()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.HasFilterQueryParamOrUnsafeMethod.message"><code class="docutils literal notranslate"><span class="pre">HasFilterQueryParamOrUnsafeMethod.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.IsAdmin"><code class="docutils literal notranslate"><span class="pre">IsAdmin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.IsAdmin.has_permission"><code class="docutils literal notranslate"><span class="pre">IsAdmin.has_permission()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.IsAdminOrAuthRead"><code class="docutils literal notranslate"><span class="pre">IsAdminOrAuthRead</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.IsAdminOrAuthRead.has_permission"><code class="docutils literal notranslate"><span class="pre">IsAdminOrAuthRead.has_permission()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.IsBasicUser"><code class="docutils literal notranslate"><span class="pre">IsBasicUser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.IsBasicUser.has_permission"><code class="docutils literal notranslate"><span class="pre">IsBasicUser.has_permission()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.IsModerator"><code class="docutils literal notranslate"><span class="pre">IsModerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.IsModerator.has_permission"><code class="docutils literal notranslate"><span class="pre">IsModerator.has_permission()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.permissions.IsModeratorOrAuthRead"><code class="docutils literal notranslate"><span class="pre">IsModeratorOrAuthRead</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.permissions.IsModeratorOrAuthRead.has_permission"><code class="docutils literal notranslate"><span class="pre">IsModeratorOrAuthRead.has_permission()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.serializers">core.serializers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.AttendanceSerializer"><code class="docutils literal notranslate"><span class="pre">AttendanceSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.AttendanceSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">AttendanceSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.AttendanceSerializer.get_user_fullname"><code class="docutils literal notranslate"><span class="pre">AttendanceSerializer.get_user_fullname()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.ChoiceSerializer"><code class="docutils literal notranslate"><span class="pre">ChoiceSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.ChoiceSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">ChoiceSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.PollSerializer"><code class="docutils literal notranslate"><span class="pre">PollSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.PollSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">PollSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.PollSerializer.create"><code class="docutils literal notranslate"><span class="pre">PollSerializer.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.QueueSerializer"><code class="docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.QueueSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.QueueSerializer.get_user_fullname"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.get_user_fullname()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.SubjectSerializer"><code class="docutils literal notranslate"><span class="pre">SubjectSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.SubjectSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">SubjectSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.UsersCreateSerializer"><code class="docutils literal notranslate"><span class="pre">UsersCreateSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.UsersCreateSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">UsersCreateSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.UsersCreateSerializer.create"><code class="docutils literal notranslate"><span class="pre">UsersCreateSerializer.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.UsersSerializer"><code class="docutils literal notranslate"><span class="pre">UsersSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.UsersSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">UsersSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.UsersSerializer.get_user_fullname"><code class="docutils literal notranslate"><span class="pre">UsersSerializer.get_user_fullname()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.serializers.VoteSerializer"><code class="docutils literal notranslate"><span class="pre">VoteSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.VoteSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">VoteSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.serializers.VoteSerializer.create"><code class="docutils literal notranslate"><span class="pre">VoteSerializer.create()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.urls">core.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.views">core.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.AttendanceViewSet"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.DESTROY_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.DESTROY_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.DESTROY_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.DESTROY_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.LIST_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.LIST_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.LIST_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.LIST_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.RETRIEVE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.RETRIEVE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.RETRIEVE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.RETRIEVE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.UPDATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.UPDATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.UPDATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.UPDATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.basename"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.create"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.description"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.destroy"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.detail"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.filterset_class"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.filterset_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.list"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.name"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.retrieve"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.retrieve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.suffix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.AttendanceViewSet.update"><code class="docutils literal notranslate"><span class="pre">AttendanceViewSet.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.PollViewSet"><code class="docutils literal notranslate"><span class="pre">PollViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">PollViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">PollViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.DESTROY_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">PollViewSet.DESTROY_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.DESTROY_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">PollViewSet.DESTROY_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.LIST_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">PollViewSet.LIST_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.LIST_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">PollViewSet.LIST_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">PollViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.RETRIEVE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">PollViewSet.RETRIEVE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.RETRIEVE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">PollViewSet.RETRIEVE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.basename"><code class="docutils literal notranslate"><span class="pre">PollViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.create"><code class="docutils literal notranslate"><span class="pre">PollViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.description"><code class="docutils literal notranslate"><span class="pre">PollViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.destroy"><code class="docutils literal notranslate"><span class="pre">PollViewSet.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.detail"><code class="docutils literal notranslate"><span class="pre">PollViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.list"><code class="docutils literal notranslate"><span class="pre">PollViewSet.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.name"><code class="docutils literal notranslate"><span class="pre">PollViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">PollViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">PollViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.retrieve"><code class="docutils literal notranslate"><span class="pre">PollViewSet.retrieve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">PollViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.PollViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">PollViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.QueueViewSet"><code class="docutils literal notranslate"><span class="pre">QueueViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.LIST_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.LIST_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.LIST_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.LIST_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.basename"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.create"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.description"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.detail"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.filter_backends"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.filter_backends</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.filterset_class"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.filterset_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.list"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.name"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.perform_create"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.perform_create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.QueueViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.SubjectViewSet"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.DESTROY_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.DESTROY_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.DESTROY_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.DESTROY_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.LIST_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.LIST_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.LIST_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.LIST_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.RETRIEVE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.RETRIEVE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.RETRIEVE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.RETRIEVE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.basename"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.create"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.description"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.destroy"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.detail"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.list"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.name"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.retrieve"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.retrieve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.SubjectViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">SubjectViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.UserCreateViewSet"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.basename"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.create"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.description"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.detail"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.name"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UserCreateViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">UserCreateViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.UsersViewSet"><code class="docutils literal notranslate"><span class="pre">UsersViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.LIST_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.LIST_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.LIST_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.LIST_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.RETRIEVE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.RETRIEVE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.RETRIEVE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.RETRIEVE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.basename"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.description"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.detail"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.list"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.me"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.me()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.name"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.retrieve"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.retrieve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.UsersViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">UsersViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.views.VotePollViewSet"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.CREATE_DESCRIPTION"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.CREATE_DESCRIPTION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.CREATE_OPERATION_ID"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.CREATE_OPERATION_ID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.REDOC_TAG"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.REDOC_TAG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.basename"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.basename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.create"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.description"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.detail"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.name"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.queryset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.serializer_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.views.VotePollViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">VotePollViewSet.suffix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sipi_back.html">sipi_back package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.asgi">sipi_back.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.middlewares">sipi_back.middlewares module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sipi_back.html#sipi_back.middlewares.RequestLoggingMiddleware"><code class="docutils literal notranslate"><span class="pre">RequestLoggingMiddleware</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.redoc">sipi_back.redoc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sipi_back.html#sipi_back.redoc.sipi_redoc"><code class="docutils literal notranslate"><span class="pre">sipi_redoc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sipi_back.html#sipi_back.redoc.sipi_redoc_user_me"><code class="docutils literal notranslate"><span class="pre">sipi_redoc_user_me()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.settings">sipi_back.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.urls">sipi_back.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back.wsgi">sipi_back.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sipi_back.html#module-sipi_back">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="users.html">users package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="users.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.migrations.html">users.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#module-users.migrations.0001_initial">users.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.migrations.html#module-users.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.apps">users.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.apps.UsersConfig"><code class="docutils literal notranslate"><span class="pre">UsersConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.apps.UsersConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">UsersConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.apps.UsersConfig.name"><code class="docutils literal notranslate"><span class="pre">UsersConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.models">users.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="users.html#users.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.ADMIN"><code class="docutils literal notranslate"><span class="pre">User.ADMIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.BASIC_USER"><code class="docutils literal notranslate"><span class="pre">User.BASIC_USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.MODERATOR"><code class="docutils literal notranslate"><span class="pre">User.MODERATOR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.ROLE_CHOICES"><code class="docutils literal notranslate"><span class="pre">User.ROLE_CHOICES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.User"><code class="docutils literal notranslate"><span class="pre">User.User</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.attendance_set"><code class="docutils literal notranslate"><span class="pre">User.attendance_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.choice_set"><code class="docutils literal notranslate"><span class="pre">User.choice_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.date_joined"><code class="docutils literal notranslate"><span class="pre">User.date_joined</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.first_name"><code class="docutils literal notranslate"><span class="pre">User.first_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_next_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_previous_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.get_role_display"><code class="docutils literal notranslate"><span class="pre">User.get_role_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.groups"><code class="docutils literal notranslate"><span class="pre">User.groups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_admin"><code class="docutils literal notranslate"><span class="pre">User.is_admin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_basic_user"><code class="docutils literal notranslate"><span class="pre">User.is_basic_user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_moderator"><code class="docutils literal notranslate"><span class="pre">User.is_moderator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_staff"><code class="docutils literal notranslate"><span class="pre">User.is_staff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.is_superuser"><code class="docutils literal notranslate"><span class="pre">User.is_superuser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.last_login"><code class="docutils literal notranslate"><span class="pre">User.last_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.last_name"><code class="docutils literal notranslate"><span class="pre">User.last_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.logentry_set"><code class="docutils literal notranslate"><span class="pre">User.logentry_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.personal_cipher"><code class="docutils literal notranslate"><span class="pre">User.personal_cipher</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.role"><code class="docutils literal notranslate"><span class="pre">User.role</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.user_permissions"><code class="docutils literal notranslate"><span class="pre">User.user_permissions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="users.html#users.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sipi</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Maksim Kautarov.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

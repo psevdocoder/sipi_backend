@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 #custom
-.idea/*
+.idea
 *.http
 /http-client.private.env.json
 /fixtures.json

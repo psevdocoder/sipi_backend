@@ -21,10 +21,15 @@ class RequestLoggingMiddleware:
             ip_address = request.META.get('REMOTE_ADDR', 'unknown')
         else:
             remote_addr = request.META.get('HTTP_X_FORWARDED_FOR')
-            ip_address = remote_addr.split(',')[0].strip() if remote_addr else\
+            ip_address = remote_addr.split(',')[0].strip() if remote_addr else \
                 'unknown'
 
-        log_data = f'{time}, {method}: {endpoint}, user: {username}, ' \
+        # Extracting and logging URL parameters
+        params = request.GET.dict()
+        params_str = ", ".join(
+            [f"{key}={value}" for key, value in params.items()])
+        log_data = f'{time}, {method}: {endpoint}?{params_str}, user: {username}, ' \
                    f'status code: {response.status_code}, IP: {ip_address}'
         logger.info(log_data)
         return response
+

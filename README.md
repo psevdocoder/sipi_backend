@@ -1,11 +1,17 @@
 # sipi_backend
 [![Docker Image CI](https://github.com/psevdocoder/sipi_backend/actions/workflows/sipi_update.yaml/badge.svg)](https://github.com/psevdocoder/sipi_backend/actions/workflows/sipi_update.yaml)
+![Pull requests](https://img.shields.io/github/issues-pr-closed/psevdocoder/sipi_backend.svg)
+![Commit activity](https://img.shields.io/github/commit-activity/y/psevdocoder/sipi_backend)
+![Last commit](https://img.shields.io/github/last-commit/psevdocoder/sipi_backend)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-092E20?style=flat&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=flat&logo=django&logoColor=white&color=ff1709&labelColor=gray)](https://www.django-rest-framework.org/)
+![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=flat&logo=gunicorn&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray)
-![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Stats](https://starchart.cc/psevdocoder/sipi_backend.svg)
+
 
 ## About
 This is project for Systems and software engineering subject, which should solve such problems as:

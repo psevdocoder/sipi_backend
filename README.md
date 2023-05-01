@@ -10,9 +10,6 @@
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)
 
-![Stats](https://starchart.cc/psevdocoder/sipi_backend.svg)
-
-
 ## About
 This is project for Systems and software engineering subject, which should solve such problems as:
 - chaos and monopoly by of the group's headman close friends during creating queues for turning in course assignments

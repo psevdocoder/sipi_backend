@@ -28,8 +28,9 @@ class RequestLoggingMiddleware:
                 'unknown'
 
         # Extracting and logging URL parameters
-        params = urllib.parse.urlencode(request.GET) if request.GET else ''
-        log_data = f'{time}, {method}: {endpoint}?{params}, ' \
+        params = urllib.parse.urlencode(request.GET)
+        params_str = f'?{params}' if params else ''
+        log_data = f'{time}, {method}: {endpoint}?{params_str}, ' \
                    f'user: {username}, status code: {response.status_code},' \
                    f' IP: {ip_address}'
         logger.info(log_data)

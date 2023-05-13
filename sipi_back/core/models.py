@@ -9,6 +9,7 @@ from users.models import User
 class Subject(models.Model):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=40, unique=True)
+    is_open = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.title))

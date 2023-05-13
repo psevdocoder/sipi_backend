@@ -15,10 +15,12 @@ QUEUE_ERROR_MESSAGE = "You are already in queue on this subject"
 
 
 class SubjectSerializer(serializers.ModelSerializer):
+    queue_is_open = serializers.BooleanField(source='is_open', read_only=True)
+
     class Meta:
-        fields = ('id', 'title', 'slug')
+        fields = ('id', 'title', 'slug', 'queue_is_open')
         model = Subject
-        read_only_fields = ('slug',)
+        read_only_fields = ('slug', 'queue_is_open')
 
 
 class UsersCreateSerializer(serializers.ModelSerializer):
@@ -142,4 +144,3 @@ class AttendanceSerializer(serializers.ModelSerializer):
         model = Attendance
         fields = ['subject', 'student', 'lesson_serial_number', 'is_present',
                   'user_fullname']
-

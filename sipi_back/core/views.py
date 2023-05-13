@@ -1,6 +1,4 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework import mixins
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -10,12 +8,12 @@ from core.filters import BySubjectFilter
 from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
     RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, DestroyViewSet
 from core.permissions import IsAdmin, IsAdminOrAuthRead, \
-    HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead
+    HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead, IsModerator
 from core.serializers import UsersSerializer, QueueSerializer, PollSerializer,\
     VoteSerializer, AttendanceSerializer, UsersCreateSerializer
 from core.models import Subject, Queue, Poll, Choice, Attendance
 from core import serializers
-from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me
+from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me, sipi_queue_access
 from users.models import User
 
 
@@ -61,6 +59,33 @@ class SubjectViewSet(RetrieveListCreateDestroy):
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+    @action(methods=['POST'], permission_classes=[IsModerator],
+            detail=False, url_path='access')
+    @sipi_queue_access()
+    def modify_queue_access(self, request):
+        subject_slug = request.data.get('subject_slug')
+        is_open = request.data.get('is_open')
+
+        if subject_slug is None or is_open is None:
+            return Response(
+                {'error': 'subject_slug and is_open fields are required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            subject = Subject.objects.get(slug=subject_slug)
+        except Subject.DoesNotExist:
+            return Response(
+                {'error': f'Subject with slug {subject_slug} does not exist.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        subject.is_open = is_open
+        subject.save()
+
+        return Response({'success': f'Subject with slug {subject_slug}'
+                                    f'updated successfully.'})
 
 
 class UserCreateViewSet(CreateViewSet):
@@ -146,6 +171,10 @@ class QueueViewSet(ListViewSet, CreateViewSet, DestroyViewSet):
     DESTROY_OPERATION_ID = 'Выйти из очереди'
 
     def perform_create(self, serializer):
+        subject = serializer.validated_data['subject']
+        if not subject.is_open:
+            raise serializers.ValidationError(
+                'Cannot add to queue for a closed subject.')
         serializer.save(user=self.request.user)
 
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=1,
@@ -163,7 +192,8 @@ class QueueViewSet(ListViewSet, CreateViewSet, DestroyViewSet):
     def destroy(self, request, *args, **kwargs):
         subject_slug = kwargs.get('slug')
         queryset = self.filter_queryset(self.get_queryset())
-        queue_item = get_object_or_404(queryset, subject__slug=subject_slug, user=request.user)
+        queue_item = get_object_or_404(queryset, subject__slug=subject_slug,
+                                       user=request.user)
         self.perform_destroy(queue_item)
         return Response(status=status.HTTP_204_NO_CONTENT)
 

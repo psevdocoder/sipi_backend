@@ -35,7 +35,7 @@ jobs:
           script: |
             cd sipi/sipi_backend
             docker compose down
-            docker rmi sipi_back
+            docker rmi just55py/sipi_back
             docker pull just55py/sipi_back:latest
             docker compose up -d
 

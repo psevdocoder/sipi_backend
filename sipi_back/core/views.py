@@ -1,12 +1,14 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import mixins
 from rest_framework import permissions, status
 from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from core.filters import BySubjectFilter
 from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
-    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate
+    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, DestroyViewSet
 from core.permissions import IsAdmin, IsAdminOrAuthRead, \
     HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead
 from core.serializers import UsersSerializer, QueueSerializer, PollSerializer,\
@@ -119,7 +121,7 @@ class UsersViewSet(RetrieveListViewSet):
         return super().retrieve(request, *args, **kwargs)
 
 
-class QueueViewSet(ListViewSet, CreateViewSet):
+class QueueViewSet(ListViewSet, CreateViewSet, DestroyViewSet):
     """
     ViewSet for Queue functionality for existing Subject
     """
@@ -129,6 +131,7 @@ class QueueViewSet(ListViewSet, CreateViewSet):
     queryset = Queue.objects.all()
     filter_backends = (DjangoFilterBackend,)
     filterset_class = BySubjectFilter
+    lookup_field = 'slug'
 
     REDOC_TAG = 'Очереди'
 
@@ -138,6 +141,9 @@ class QueueViewSet(ListViewSet, CreateViewSet):
 
     CREATE_DESCRIPTION = 'Встать в очередь'
     CREATE_OPERATION_ID = 'Встать в очередь'
+
+    DESTROY_DESCRIPTION = 'Выйти из очереди'
+    DESTROY_OPERATION_ID = 'Выйти из очереди'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -151,6 +157,18 @@ class QueueViewSet(ListViewSet, CreateViewSet):
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+    @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
+                operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
+    def destroy(self, request, *args, **kwargs):
+        subject_slug = kwargs.get('slug')
+        queryset = self.filter_queryset(self.get_queryset())
+        queue_item = get_object_or_404(queryset, subject__slug=subject_slug, user=request.user)
+        self.perform_destroy(queue_item)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def perform_destroy(self, instance):
+        instance.delete()
 
 
 class PollViewSet(RetrieveListCreateDestroy):

@@ -24,6 +24,13 @@ class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     pass
 
 
+class DestroyViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    """
+    DELETE specified item
+    """
+    pass
+
+
 class RetrieveListCreateDestroy(mixins.RetrieveModelMixin,
                                 mixins.ListModelMixin,
                                 mixins.CreateModelMixin,

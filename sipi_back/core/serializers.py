@@ -72,6 +72,7 @@ class QueueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Queue
+        lookup_field = 'slug'
         fields = (
             'user', 'subject', 'timestamp', 'subject_name', 'user_fullname')
         read_only_fields = (

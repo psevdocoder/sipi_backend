@@ -56,9 +56,8 @@ class UsersSerializer(serializers.ModelSerializer):
 
 
 class QueueSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(
-        default=serializers.CurrentUserDefault(),
-    )
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    username = serializers.CharField(source='user.username', read_only=True)
     user_fullname = serializers.SerializerMethodField()
     subject = serializers.SlugRelatedField(
         many=False, read_only=False, slug_field='slug',
@@ -73,8 +72,8 @@ class QueueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Queue
         lookup_field = 'slug'
-        fields = (
-            'user', 'subject', 'timestamp', 'subject_name', 'user_fullname')
+        fields = ('user', 'subject', 'timestamp', 'subject_name',
+                  'user_fullname', 'username')
         read_only_fields = (
             'user', 'timestamp', 'subject', 'subject_name', 'user_fullname')
         validators = [

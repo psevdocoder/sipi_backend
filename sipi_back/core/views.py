@@ -39,6 +39,9 @@ class SubjectViewSet(RetrieveListCreateDestroy):
     DESTROY_DESCRIPTION = 'Удалить предмет'
     DESTROY_OPERATION_ID = 'Удалить предмет'
 
+    MODIFY_QUEUE_ERR = 'subject_slug and is_open fields are both required ' \
+                       'with declared types.'
+
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
@@ -67,24 +70,15 @@ class SubjectViewSet(RetrieveListCreateDestroy):
         subject_slug = request.data.get('subject_slug')
         is_open = request.data.get('is_open')
 
-        if subject_slug is None or is_open is None:
-            return Response(
-                {'error': 'subject_slug and is_open fields are required.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        if not all([isinstance(subject_slug, str), isinstance(is_open, bool)]):
+            return Response({'error': self.MODIFY_QUEUE_ERR},
+                            status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            subject = Subject.objects.get(slug=subject_slug)
-        except Subject.DoesNotExist:
-            return Response(
-                {'error': f'Subject with slug {subject_slug} does not exist.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
+        subject = get_object_or_404(Subject, slug=subject_slug)
         subject.is_open = is_open
         subject.save()
 
-        return Response({'success': f'Subject with slug {subject_slug}'
+        return Response({'success': f'Subject with slug {subject_slug} '
                                     f'updated successfully.'})
 
 

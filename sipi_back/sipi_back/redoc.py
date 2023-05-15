@@ -1,3 +1,5 @@
+import dataclasses
+
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg.views import get_schema_view
@@ -80,8 +82,7 @@ def sipi_redoc_user_me(tag):
                 type=openapi.TYPE_OBJECT,
                 properties={
                     'username': openapi.Schema(type=openapi.TYPE_STRING),
-                    'personal_cipher':
-                        openapi.Schema(type=openapi.TYPE_STRING),
+                    'personal_cipher': openapi.Schema(type=openapi.TYPE_STRING),
                     'role': openapi.Schema(type=openapi.TYPE_INTEGER),
                     "user_fullname": openapi.Schema(type=openapi.TYPE_STRING)
                 },
@@ -115,7 +116,7 @@ def sipi_queue_access():
         operation_id=operation_id,
         tags=[tag],
         responses={
-            status.HTTP_200_OK: openapi.Response(
+            status.HTTP_201_CREATED: openapi.Response(
                 description='Успешный ответ',
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -135,6 +136,68 @@ def sipi_queue_access():
             ),
             status.HTTP_404_NOT_FOUND: openapi.Response(
                 description='Предмет не найден',
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'error': openapi.Schema(type=openapi.TYPE_STRING)
+                    }
+                )
+            )
+        },
+    )
+
+
+def queue_list_filtered():
+    access_level = 1
+    access_list = [access[level] for level in access if level > access_level]
+    access_str = ", ".join(access_list)
+
+    description = 'Получить список человек и состояние очереди по предмету.' \
+                  'Необходим фильтрующий параметр, например:' \
+                  '<code>/api/queue/filtered/?subject=ost/</code>'
+    operation_id = 'Получить очередь по предмету'
+    tag = 'Очереди'
+    return swagger_auto_schema(
+        security=[{'Bearer': []}],
+        operation_description=f'{description}<br>Права доступа: '
+                              f'<b>{access.get(access_level)}<b>'
+                              f'{f", {access_str}" if access_str else ""}',
+        operation_id=operation_id,
+        tags=[tag],
+        responses={
+            status.HTTP_201_CREATED: openapi.Response(
+                description='Успешный ответ',
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'is_open': openapi.Schema(type='boolean', description='Открыта ли очередь'),
+                        'queue_persons': openapi.Schema(
+                            type='array',
+                            items=openapi.Schema(
+                                type='object',
+                                properties={
+                                    'subject': openapi.Schema(type='string', description='Предмет'),
+                                    'timestamp': openapi.Schema(type='string', format='date-time', description='Временная метка'),
+                                    'subject_name': openapi.Schema(type='string', description='Наименование предмета'),
+                                    'user_fullname': openapi.Schema(type='string', description='Полное имя пользователя'),
+                                    'username': openapi.Schema(type='string', description='Имя пользователя')
+                                }
+                            )
+                        )
+                    }
+                )
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description='Некорректный запрос',
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'error': openapi.Schema(type=openapi.TYPE_STRING)
+                    }
+                )
+            ),
+            status.HTTP_404_NOT_FOUND: openapi.Response(
+                description='Not found',
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
                     properties={

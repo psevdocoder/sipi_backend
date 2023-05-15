@@ -1,4 +1,7 @@
+from django.db import transaction
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -6,14 +9,16 @@ from rest_framework.response import Response
 
 from core.filters import BySubjectFilter
 from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
-    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, DestroyViewSet
+    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, DestroyViewSet, \
+    ListCreateDestroy
 from core.permissions import IsAdmin, IsAdminOrAuthRead, \
     HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead, IsModerator
 from core.serializers import UsersSerializer, QueueSerializer, PollSerializer,\
     VoteSerializer, AttendanceSerializer, UsersCreateSerializer
 from core.models import Subject, Queue, Poll, Choice, Attendance
 from core import serializers
-from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me, sipi_queue_access
+from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me, sipi_queue_access, \
+    queue_list_filtered
 from users.models import User
 
 
@@ -140,16 +145,14 @@ class UsersViewSet(RetrieveListViewSet):
         return super().retrieve(request, *args, **kwargs)
 
 
-class QueueViewSet(ListViewSet, CreateViewSet, DestroyViewSet):
+class QueueViewSet(ListCreateDestroy):
     """
     ViewSet for Queue functionality for existing Subject
     """
-    permission_classes = [
-        permissions.IsAuthenticated, HasFilterQueryParamOrUnsafeMethod]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = QueueSerializer
     queryset = Queue.objects.all()
     filter_backends = (DjangoFilterBackend,)
-    filterset_class = BySubjectFilter
     lookup_field = 'slug'
 
     REDOC_TAG = 'Очереди'
@@ -180,6 +183,20 @@ class QueueViewSet(ListViewSet, CreateViewSet, DestroyViewSet):
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+    @action(detail=False, methods=['get'], url_path='filtered')
+    @queue_list_filtered()
+    def list_filtered(self, request):
+        slug = self.request.query_params.get('subject', None)
+        if not slug:
+            message = {"error": "incorrect filter param"}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        subject = get_object_or_404(Subject, slug=slug)
+        queryset = self.filter_queryset(self.get_queryset())
+        queue_items = queryset.filter(subject__slug=slug)
+        serializer = QueueSerializer(queue_items, many=True)
+        data = {"is_open": subject.is_open, "queue_persons": serializer.data}
+        return Response(data)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)

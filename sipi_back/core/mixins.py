@@ -43,6 +43,16 @@ class RetrieveListCreateDestroy(mixins.RetrieveModelMixin,
     pass
 
 
+class ListCreateDestroy(mixins.ListModelMixin,
+                        mixins.CreateModelMixin,
+                        mixins.DestroyModelMixin,
+                        viewsets.GenericViewSet):
+    """
+    POST, GET (/item/), DELETE requests
+    """
+    pass
+
+
 class RetrieveListCreateDestroyUpdate(mixins.RetrieveModelMixin,
                                       mixins.ListModelMixin,
                                       mixins.CreateModelMixin,

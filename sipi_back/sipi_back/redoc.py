@@ -154,7 +154,7 @@ def queue_list_filtered():
 
     description = 'Получить список человек и состояние очереди по предмету.' \
                   'Необходим фильтрующий параметр, например:' \
-                  '<code>/api/queue/filtered/?subject=ost/</code>'
+                  '<code>/api/queue/filtered/?subject=ost</code>'
     operation_id = 'Получить очередь по предмету'
     tag = 'Очереди'
     return swagger_auto_schema(

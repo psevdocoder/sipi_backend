@@ -195,7 +195,7 @@ class QueueViewSet(ListCreateDestroy):
         queryset = self.filter_queryset(self.get_queryset())
         queue_items = queryset.filter(subject__slug=slug)
         serializer = QueueSerializer(queue_items, many=True)
-        data = {"is_open": subject.is_open, "queue_persons": serializer.data}
+        data = {"is_open": subject.is_open, "subject_name": subject.title, "queue_persons": serializer.data}
         return Response(data)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,

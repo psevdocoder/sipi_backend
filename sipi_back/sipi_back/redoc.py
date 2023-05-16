@@ -171,12 +171,13 @@ def queue_list_filtered():
                     type=openapi.TYPE_OBJECT,
                     properties={
                         'is_open': openapi.Schema(type='boolean', description='Открыта ли очередь'),
+                        'subject_name': openapi.Schema(type='string', description='Наименование предмета'),
                         'queue_persons': openapi.Schema(
                             type='array',
                             items=openapi.Schema(
                                 type='object',
                                 properties={
-                                    'subject': openapi.Schema(type='string', description='Предмет'),
+                                    'subject': openapi.Schema(type='string', description='Уникальный slug предмета'),
                                     'timestamp': openapi.Schema(type='string', format='date-time', description='Временная метка'),
                                     'subject_name': openapi.Schema(type='string', description='Наименование предмета'),
                                     'user_fullname': openapi.Schema(type='string', description='Полное имя пользователя'),

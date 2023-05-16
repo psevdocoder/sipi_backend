@@ -29,6 +29,7 @@ class SubjectViewSet(RetrieveListCreateDestroy):
     queryset = Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
     permission_classes = (IsAdminOrAuthRead,)
+    lookup_field = 'slug'
 
     REDOC_TAG = 'Предметы'
 

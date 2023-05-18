@@ -1,15 +1,12 @@
-from django.db import transaction
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from core.filters import BySubjectFilter
-from core.mixins import CreateViewSet, RetrieveListViewSet, ListViewSet, \
-    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, DestroyViewSet, \
+from core.mixins import CreateViewSet, RetrieveListViewSet, \
+    RetrieveListCreateDestroy, RetrieveListCreateDestroyUpdate, \
     ListCreateDestroy
 from core.permissions import IsAdmin, IsAdminOrAuthRead, \
     HasFilterQueryParamOrUnsafeMethod, IsModeratorOrAuthRead, IsModerator
@@ -17,8 +14,8 @@ from core.serializers import UsersSerializer, QueueSerializer, PollSerializer,\
     VoteSerializer, AttendanceSerializer, UsersCreateSerializer
 from core.models import Subject, Queue, Poll, Choice, Attendance
 from core import serializers
-from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me, sipi_queue_access, \
-    queue_list_filtered
+from sipi_back.redoc import sipi_redoc, sipi_redoc_user_me, \
+    sipi_queue_access, queue_list_filtered
 from users.models import User
 
 
@@ -51,28 +48,61 @@ class SubjectViewSet(RetrieveListCreateDestroy):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Получить информацию о всех предметах.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода list родительского класса
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION,
                 operation_id=CREATE_OPERATION_ID,
                 access_level=2, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать предмет.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить пользователя по slug.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода retrieve родительского класса
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Обработать удаление предмета.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода destroy родительского класса
+        """
         return super().destroy(request, *args, **kwargs)
 
     @action(methods=['POST'], permission_classes=[IsModerator],
             detail=False, url_path='access')
     @sipi_queue_access()
     def modify_queue_access(self, request):
+        """
+        Обработать изменение статуса предмета
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :return: Response: Статус обработки запроса
+        """
         subject_slug = request.data.get('subject_slug')
         is_open = request.data.get('is_open')
 
@@ -83,7 +113,6 @@ class SubjectViewSet(RetrieveListCreateDestroy):
         subject = get_object_or_404(Subject, slug=subject_slug)
         subject.is_open = is_open
         subject.save()
-
         return Response({'success': f'Subject with slug {subject_slug} '
                                     f'updated successfully.'})
 
@@ -103,6 +132,13 @@ class UserCreateViewSet(CreateViewSet):
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=3,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Обработать создание пользователя
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
 
@@ -125,6 +161,11 @@ class UsersViewSet(RetrieveListViewSet):
     @action(detail=False, methods=['get'], url_path='me')
     @sipi_redoc_user_me(tag=REDOC_TAG)
     def me(self, request):
+        """
+        Вернуть информацию о пользователе
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :return: Response: Информация о пользователе
+        """
         if not request.data:
             serializer = self.serializer_class(request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -137,12 +178,26 @@ class UsersViewSet(RetrieveListViewSet):
     @sipi_redoc(description=LIST_DESCRIPTION,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG, access_level=1)
     def list(self, request, *args, **kwargs):
+        """
+        Получить информацию о всех пользователях.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода list родительского класса
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG,
                 access_level=1)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить пользователя по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода retrieve родительского класса
+        """
         return super().retrieve(request, *args, **kwargs)
 
 
@@ -169,6 +224,12 @@ class QueueViewSet(ListCreateDestroy):
     DESTROY_OPERATION_ID = 'Выйти из очереди'
 
     def perform_create(self, serializer):
+        """
+        Выполнить добавление в очередь
+        :param serializer: Сериализатор, используемый для десериализации и
+        проверки данных.
+        :return: None
+        """
         subject = serializer.validated_data['subject']
         if not subject.is_open:
             raise serializers.ValidationError(
@@ -178,16 +239,35 @@ class QueueViewSet(ListCreateDestroy):
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=1,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Обработать добавление в очередь.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Получить очередь по всем предметам.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода list родительского класса
+        """
         return super().list(request, *args, **kwargs)
 
     @action(detail=False, methods=['get'], url_path='filtered')
     @queue_list_filtered()
     def list_filtered(self, request):
+        """
+        Получить очередь по предмету
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :return: Response
+        """
         slug = self.request.query_params.get('subject', None)
         if not slug:
             message = {"error": "incorrect filter param"}
@@ -202,15 +282,19 @@ class QueueViewSet(ListCreateDestroy):
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Обработать выход из очереди.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода destroy родительского класса
+        """
         subject_slug = kwargs.get('slug')
         queryset = self.filter_queryset(self.get_queryset())
         queue_item = get_object_or_404(queryset, subject__slug=subject_slug,
                                        user=request.user)
-        self.perform_destroy(queue_item)
+        queue_item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def perform_destroy(self, instance):
-        instance.delete()
 
 
 class PollViewSet(RetrieveListCreateDestroy):
@@ -238,22 +322,50 @@ class PollViewSet(RetrieveListCreateDestroy):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Получить список опросов.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода list родительского класса
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION,
                 operation_id=CREATE_OPERATION_ID,
                 access_level=2, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать опрос.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить опрос по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода retrieve родительского класса
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Убрать опрос по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода destroy родительского класса
+        """
         return super().destroy(request, *args, **kwargs)
 
 
@@ -273,12 +385,19 @@ class VotePollViewSet(CreateViewSet):
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=1,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Обработать запрос на голосование пользователя.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
 
 class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     """
-    ViewSet used for marking attendance of students
+    Вьюсет обрабатывающий запросы по посещаемости.
     """
     queryset = Attendance.objects.all()
     serializer_class = AttendanceSerializer
@@ -299,10 +418,8 @@ class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
                          'пары, урока и т.д.'
     CREATE_OPERATION_ID = 'Поставить посещение студенту'
 
-    RETRIEVE_DESCRIPTION = 'Поставить отметку о посещаемости студента. <br>' \
-                           'Параметр lesson_serial_number - Порядковый номер '\
-                           'пары, урока и т.д.'
-    RETRIEVE_OPERATION_ID = 'Поставить посещение студенту'
+    RETRIEVE_DESCRIPTION = 'Получить отметку о посещаемости студента.'
+    RETRIEVE_OPERATION_ID = 'Получить посещение студента'
 
     UPDATE_DESCRIPTION = 'Изменить отметку посещения студенту.  <br>' \
                          'Параметр lesson_serial_number - Порядковый номер ' \
@@ -317,24 +434,59 @@ class AttendanceViewSet(RetrieveListCreateDestroyUpdate):
     @sipi_redoc(description=LIST_DESCRIPTION, access_level=1,
                 operation_id=LIST_OPERATION_ID, tag=REDOC_TAG)
     def list(self, request, *args, **kwargs):
+        """
+        Получить список посещаемости по фильтру предмета.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода list родительского класса
+        """
         return super().list(request, *args, **kwargs)
 
     @sipi_redoc(description=CREATE_DESCRIPTION, access_level=2,
                 operation_id=CREATE_OPERATION_ID, tag=REDOC_TAG)
     def create(self, request, *args, **kwargs):
+        """
+        Создать отметку о посещаемости.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода create родительского класса
+        """
         return super().create(request, *args, **kwargs)
 
     @sipi_redoc(description=RETRIEVE_DESCRIPTION, access_level=1,
                 operation_id=RETRIEVE_OPERATION_ID, tag=REDOC_TAG)
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить отметку о посещаемости по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода retrieve родительского класса
+        """
         return super().retrieve(request, *args, **kwargs)
 
     @sipi_redoc(description=UPDATE_DESCRIPTION, access_level=2,
                 operation_id=UPDATE_OPERATION_ID, tag=REDOC_TAG)
     def update(self, request, *args, **kwargs):
+        """
+        Обновить отметку о посещаемости по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода retrieve родительского класса
+        """
         return super().update(request, *args, **kwargs)
 
-    @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=1,
+    @sipi_redoc(description=DESTROY_DESCRIPTION, access_level=2,
                 operation_id=DESTROY_OPERATION_ID, tag=REDOC_TAG)
     def destroy(self, request, *args, **kwargs):
+        """
+        Убрать отметку о посещаемости по id.
+        :param request: Объект запроса, содержащий данные о запросе клиента.
+        :param args:  Представляет необязательные позиционные аргументы.
+        :param kwargs: Представляет необязательные именованные аргументы.
+        :return: Возвращает результат метода destroy родительского класса
+        """
         return super().destroy(request, *args, **kwargs)

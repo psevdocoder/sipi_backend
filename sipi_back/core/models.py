@@ -7,6 +7,9 @@ from users.models import User
 
 
 class Subject(models.Model):
+    """
+    Модель предмета
+    """
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=40, unique=True)
     is_open = models.BooleanField(default=False)
@@ -17,6 +20,9 @@ class Subject(models.Model):
 
 
 class Queue(models.Model):
+    """
+    Модель очереди
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -40,10 +46,16 @@ class Queue(models.Model):
 
 
 class Poll(models.Model):
+    """
+    Модель опроса
+    """
     title = models.CharField(max_length=200)
 
 
 class Choice(models.Model):
+    """
+    Модель вариантов в опросах
+    """
     poll = models.ForeignKey(
         Poll, related_name='choices', on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
@@ -52,6 +64,9 @@ class Choice(models.Model):
 
 
 class Attendance(models.Model):
+    """
+    Модель посещаемости
+    """
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     lesson_serial_number = models.PositiveSmallIntegerField(

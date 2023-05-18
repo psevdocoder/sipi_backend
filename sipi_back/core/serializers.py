@@ -15,6 +15,9 @@ QUEUE_ERROR_MESSAGE = "You are already in queue on this subject"
 
 
 class SubjectSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор предметов
+    """
     queue_is_open = serializers.BooleanField(source='is_open', read_only=True)
 
     class Meta:
@@ -24,6 +27,9 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 
 class UsersCreateSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор создания пользователя
+    """
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
 
@@ -36,6 +42,11 @@ class UsersCreateSerializer(serializers.ModelSerializer):
         read_only_fields = ('password',)
 
     def create(self, validated_data):
+        """
+        Создать пользователя
+        :param validated_data: данные опроса для создания объекта в базе данных
+        :return: объект пользователя
+        """
         password = ''.join(
             random.choices(string.ascii_letters + string.digits,
                            k=PASSWORD_LENGTH))
@@ -46,10 +57,18 @@ class UsersCreateSerializer(serializers.ModelSerializer):
 
 
 class UsersSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор пользователей
+    """
     user_fullname = serializers.SerializerMethodField()
 
     @staticmethod
     def get_user_fullname(obj):
+        """
+        Получить полное имя пользователя
+        :param obj: объект пользователя
+        :return: полное имя пользователя
+        """
         return '{} {}'.format(obj.first_name, obj.last_name)
 
     class Meta:
@@ -58,6 +77,9 @@ class UsersSerializer(serializers.ModelSerializer):
 
 
 class QueueSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор очередей
+    """
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     username = serializers.CharField(source='user.username', read_only=True)
     user_fullname = serializers.SerializerMethodField()
@@ -69,6 +91,11 @@ class QueueSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_user_fullname(obj):
+        """
+        Получить полное имя пользователя
+        :param obj: объект пользователя
+        :return: полное имя пользователя
+        """
         return '{} {}'.format(obj.user.first_name, obj.user.last_name)
 
     class Meta:
@@ -88,12 +115,18 @@ class QueueSerializer(serializers.ModelSerializer):
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор выбора в опросе
+    """
     class Meta:
         model = Choice
         fields = ('id', 'text', 'votes')
 
 
 class PollSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор опросов
+    """
     choices = ChoiceSerializer(many=True, read_only=False)
 
     class Meta:
@@ -101,6 +134,11 @@ class PollSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'choices')
 
     def create(self, validated_data):
+        """
+        Создать опрос
+        :param validated_data: данные опроса для создания объекта в базе данных
+        :return: объект опроса
+        """
         choices_data = validated_data.pop('choices')
         poll = Poll.objects.create(**validated_data)
         for choice_data in choices_data:
@@ -109,6 +147,9 @@ class PollSerializer(serializers.ModelSerializer):
 
 
 class VoteSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор голосования
+    """
     id = serializers.PrimaryKeyRelatedField(
         queryset=Choice.objects.all()
     )
@@ -118,8 +159,13 @@ class VoteSerializer(serializers.ModelSerializer):
         fields = ('id',)
 
     def create(self, validated_data):
-        choice = validated_data['id']
-        user = self.context['request'].user
+        """
+        Добавить объект выбора пользователя
+        :param validated_data:
+        :return: объект выбора
+        """
+        choice = validated_data.get("id")
+        user = self.context.get('request').user
         if choice.voters.filter(id=user.id).exists():
             raise ValidationError("You have already voted for this choice.")
         choice.voters.add(user)
@@ -129,6 +175,9 @@ class VoteSerializer(serializers.ModelSerializer):
 
 
 class AttendanceSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор посещаемости
+    """
     is_present = serializers.BooleanField(read_only=False)
     user_fullname = serializers.SerializerMethodField(read_only=True)
     subject = serializers.SlugRelatedField(many=False,
@@ -138,6 +187,11 @@ class AttendanceSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_user_fullname(obj):
+        """
+        Получить полное имя пользователя
+        :param obj: объект пользователя
+        :return: полное имя пользователя
+        """
         return '{} {}'.format(obj.student.first_name, obj.student.last_name)
 
     class Meta:

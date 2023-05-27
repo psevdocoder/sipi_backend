@@ -19,11 +19,16 @@ class SubjectSerializer(serializers.ModelSerializer):
     Сериализатор предметов
     """
     queue_is_open = serializers.BooleanField(source='is_open', read_only=True)
+    count_in_queue = serializers.SerializerMethodField(read_only=True)
+
+    @staticmethod
+    def get_count_in_queue(subject) -> int:
+        return Queue.objects.filter(subject=subject).count()
 
     class Meta:
-        fields = ('id', 'title', 'slug', 'queue_is_open')
+        fields = ('id', 'title', 'slug', 'queue_is_open', 'count_in_queue')
         model = Subject
-        read_only_fields = ('slug', 'queue_is_open')
+        read_only_fields = ('slug', 'queue_is_open', 'count_in_queue')
 
 
 class UsersCreateSerializer(serializers.ModelSerializer):

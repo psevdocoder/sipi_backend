@@ -18,10 +18,11 @@ services:
     image: postgres:16.1-alpine
     container_name: postgres
     restart: unless-stopped
+    env_file: env
     networks:
       - default
     volumes:
-      - ./postgres_sipi:/var/lib/postgresql/data
+      - ./postgres_sipi:/var/lib/postgresql/data/
 
   nginx:
     image: nginx:latest
@@ -31,9 +32,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d
-      - ./frontend/build:/usr/share/nginx/html/
-      - ./static_value:/static_backend/
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html/
+      - ./static_backend:/static/static_backend/
       - ./cert/:/cert/
     networks:
       - default

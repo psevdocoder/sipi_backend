@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.SSH_PASSPHRASE }}
 #          key: ${{ secrets.SSH_KEY }}
           script: |
-            cd sipi/sipi_backend
+            cd sipi_backend
             docker compose down
             docker rmi just55py/sipi_back
             docker pull just55py/sipi_back:latest

@@ -14,7 +14,31 @@ services:
       - ./logs:/sipi/logs
       - ./static_backend:/sipi/static_backend
 
+  postgres:
+    image: postgres:16.1-alpine
+    container_name: postgres
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - ./postgres_sipi:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d
+      - ./frontend/build:/usr/share/nginx/html/
+      - ./static_value:/static_backend/
+      - ./cert/:/cert/
+    networks:
+      - default
+
 networks:
   default:
-    name: timeweb_net
+    name: vps_backend
     external: true
